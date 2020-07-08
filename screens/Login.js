@@ -9,7 +9,8 @@ import {
   Image,
   Alert,
 } from 'react-native';
-import {Icon} from 'react-native-elements';
+
+import {Card, Icon} from 'react-native-elements';
 
 import * as Animatable from 'react-native-animatable';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
@@ -63,17 +64,18 @@ export default class SignUpView extends Component {
   };
 
   render() {
+
+    const baseUrl='https://www.balajiwafers.com/wp-content/themes/custom/img/BalajiWafers.svg';
     return (
       <View style={styles.container}>
         <View style={styles.center}>
-          <View style={styles.inputContainer}>
-            <Icon
-              raised
-              // style={styles.inputIcon}
-              name="envelope"
-              type="font-awesome"
-              color="#ff8913"
-            />
+          <Card
+            // title='Balaji'
+            image={require('../image/Balaji.jpg')}
+            imageStyle={{ width: 200, height: 200 }}
+          >
+            <View style={styles.inputContainer}>
+            <Icon raised name="envelope" type="font-awesome" color="#ff8913" />
             <TextInput
               style={styles.inputs}
               placeholder="Email"
@@ -84,16 +86,10 @@ export default class SignUpView extends Component {
                   email_id,
                 })
               }
-            />{' '}
+            />
           </View>
           <View style={styles.inputContainer}>
-            <Icon
-              raised
-              // style={styles.inputIcon}
-              name="key"
-              type="font-awesome"
-              color="#ff8913"
-            />
+            <Icon raised name="key" type="font-awesome" color="#ff8913" />
             <TextInput
               style={styles.inputs}
               placeholder="Password"
@@ -104,14 +100,16 @@ export default class SignUpView extends Component {
                   password,
                 })
               }
-            />{' '}
+            />
           </View>
           <TouchableHighlight
             style={[styles.loginbuttonContainer, styles.loginButton]}
             onPress={this.CheckLogin}>
-            <Text style={styles.signUpText}> Login </Text>{' '}
-          </TouchableHighlight>{' '}
-        </View>{' '}
+            <Text style={styles.signUpText}> Login </Text>
+          </TouchableHighlight>
+            <Text style={{marginLeft: 50}}>Balaji Wafers & Namkeens</Text>
+          </Card>
+        </View>
       </View>
     );
   }
@@ -119,7 +117,7 @@ export default class SignUpView extends Component {
 
 const styles = StyleSheet.create({
   center: {
-    marginTop: 40,
+    marginTop: 1,
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -128,14 +126,16 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#ecf0f1',
+    width: 360,
   },
   inputContainer: {
-    borderBottomColor: '#ffffff',
-    backgroundColor: '#ffffff',
+    borderBottomColor: '#ecf0f1',
+    backgroundColor: '#ecf0f1',
     borderRadius: 30,
     borderBottomWidth: 1,
     width: 270,
     height: 45,
+    marginTop: 5,
     marginBottom: 20,
     flexDirection: 'row',
     alignItems: 'center',
@@ -143,7 +143,7 @@ const styles = StyleSheet.create({
   inputs: {
     height: 45,
     marginLeft: 16,
-    borderBottomColor: '#FFFFFF',
+    borderBottomColor: '#ff8918',
     flex: 1,
   },
   inputIcon: {
@@ -171,6 +171,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginBottom: 20,
     marginTop: 20,
+    marginLeft: 50,
     width: 150,
     borderRadius: 30,
   },
@@ -181,6 +182,7 @@ const styles = StyleSheet.create({
   },
 
   loginButton: {
+    marginLeft: 50,
     backgroundColor: '#FF8913',
   },
   signUpText: {

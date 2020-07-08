@@ -10,20 +10,10 @@ import {
   ActivityIndicator,
   Platform,
 } from 'react-native';
+import {Card, ListItem,} from 'react-native-elements';
 import * as Animatable from 'react-native-animatable';
 
-
 export default class Project extends Component {
-  static navigationOptions = {
-    title: 'Order',
-    headerStyle: {
-      backgroundColor: '#f4511e',
-    },
-
-    headerTitleStyle: {
-      fontWeight: 'bold',
-    },
-  };
 
   constructor(props) {
     super(props);
@@ -76,6 +66,37 @@ export default class Project extends Component {
     );
   };
 
+  keyExtractor = (item, index) => index.toString();
+
+  renderItem = ({item}) => (
+    <ListItem
+      title={item.product_name}
+      subtitle={
+        <View style={styles.subtitleView}>
+          <Text style={styles.ratingText}>
+            Weight: {item.product_weight}
+            Price: {item.product_price_shopkeeper}
+          </Text>
+        </View>
+      }
+      leftAvatar={{
+        size: 100,
+        source: item.image && {uri: item.image},
+        title: item.product_name,
+      }}
+      onPress={() =>
+        this.props.navigation.navigate('Order_List', {
+          product_name: item.product_name,
+          product_id: item.product_id,
+          price: item.product_price_shopkeeper,
+          product_weight: item.product_weight,
+        })
+      }
+      bottomDivider
+      chevron
+    />
+  );
+
   render() {
     if (this.state.isLoading) {
       return (
@@ -85,36 +106,17 @@ export default class Project extends Component {
       );
     }
 
-    const nn = 'Hii';
-
     return (
-        <View style={styles.MainContainer}>
+      <View style={styles.MainContainer}>
+        <Card containerStyle={{padding: 0}}>
           <FlatList
+            // keyExtractor={this.keyExtractor}
             data={this.state.dataSource}
             ItemSeparatorComponent={this.FlatListItemSeparator}
-            renderItem={({item}) => (
-              <Text
-                style={styles.FlatListItemStyle}
-                onPress={() =>
-                  this.props.navigation.navigate('Order_List', {
-                    product_name: item.product_name,
-                    product_id: item.product_id,
-                    price: item.product_price_shopkeeper,
-                    product_weight: item.product_weight,
-                  })
-                }>
-                {' '}
-                {item.product_name}
-                <Text style={styles.fonts}>
-                  {'\n'}
-                  {'\n'}Weight: {item.product_weight} Price:{' '}
-                  {item.product_price_shopkeeper}{' '}
-                </Text>
-              </Text>
-            )}
-            keyExtractor={(item, index) => index.toString()}
+            renderItem={this.renderItem}
           />
-        </View>
+        </Card>
+      </View>
     );
   }
 }
@@ -123,8 +125,20 @@ const styles = StyleSheet.create({
   MainContainer: {
     justifyContent: 'center',
     flex: 1,
-    margin: 10,
+    // margin: 10,
+    backgroundColor: '#ff8918',
     paddingTop: Platform.OS === 'ios' ? 20 : 0,
+  },
+
+  subtitleView: {
+    flexDirection: 'row',
+    paddingLeft: 10,
+    paddingTop: 5,
+  },
+
+  ratingText: {
+    paddingLeft: 10,
+    color: 'grey',
   },
 
   FlatListItemStyle: {

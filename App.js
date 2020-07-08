@@ -11,8 +11,8 @@ import Login from './screens/Login';
 
 
 
-const AppNavigator = createStackNavigator({
-
+const AppNavigator = createStackNavigator(
+  {
   Login: {
     screen: Login,
     navigationOptions: {

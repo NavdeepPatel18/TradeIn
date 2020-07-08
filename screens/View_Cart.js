@@ -12,6 +12,8 @@ import {
   TouchableHighlight,
 } from 'react-native';
 import {Button} from 'native-base';
+import {Card, ListItem,} from 'react-native-elements';
+
 
 export default class Project extends Component {
   constructor(props) {
@@ -71,6 +73,28 @@ export default class Project extends Component {
     );
   };
 
+  keyExtractor = (item, index) => index.toString();
+
+  renderItem = ({item}) => (
+    <ListItem
+      title={item.product_name}
+      subtitle={
+        <View style={styles.subtitleView}>
+          <Text style={styles.ratingText}>
+          quantity: {item.quantity} 
+          Total Price: {item.total_price}
+          </Text>
+        </View>
+      }
+      leftAvatar={{
+        size: 100,
+        source: item.image && {uri: item.image},
+        title: item.product_name,
+      }}
+      bottomDivider
+    />
+  );
+
   render() {
     if (this.state.isLoading) {
       return (
@@ -85,31 +109,20 @@ export default class Project extends Component {
 
     return (
       <View style={styles.MainContainer}>
-        <FlatList
-          Vertical={true}
-          data={this.state.dataSource}
-          ItemSeparatorComponent={this.FlatListItemSeparator}
-          renderItem={({item}) => (
-            <Text style={styles.FlatListItemStyle}>
-              {' '}
-              {item.product_id}
-              <Text style={styles.fonts}>
-                {'\n'}
-                {'\n'}quantity: {item.quantity} {c_id} Total Price{' '}
-                {item.total_price}{' '}
-              </Text>
-            </Text>
-          )}
-          keyExtractor={(item, index) => index.toString()}
-        />
-
-        <View>
+        <Card containerStyle={{padding: 0}}>
+          <FlatList
+            // keyExtractor={this.keyExtractor}
+            Vertical={true}
+            data={this.state.dataSource}
+            ItemSeparatorComponent={this.FlatListItemSeparator}
+            renderItem={this.renderItem}
+          />
           <TouchableHighlight
             style={[styles.buttonContainer, styles.signupButton]}
             onPress={this.order}>
             <Text style={styles.signUpText}>Confirm Order</Text>
           </TouchableHighlight>
-        </View>
+        </Card> 
       </View>
     );
   }
@@ -154,9 +167,19 @@ const styles = StyleSheet.create({
   MainContainer: {
     justifyContent: 'center',
     flex: 1,
-    backgroundColor: '#ecf0f1',
-
+    backgroundColor: '#ff8918',
     paddingTop: Platform.OS === 'ios' ? 20 : 0,
+  },
+
+  subtitleView: {
+    flexDirection: 'row',
+    paddingLeft: 10,
+    paddingTop: 5
+  },
+
+  ratingText: {
+    paddingLeft: 10,
+    color: 'grey'
   },
 
   FlatListItemStyle: {

@@ -9,10 +9,10 @@ import {
   ActivityIndicator,
   Platform,
 } from 'react-native';
+import {Card, ListItem,} from 'react-native-elements';
 import * as Animatable from 'react-native-animatable';
 
 export default class Project extends Component {
-  
   constructor(props) {
     super(props);
 
@@ -50,6 +50,24 @@ export default class Project extends Component {
     );
   };
 
+  renderItem = ({item}) => (
+    <ListItem
+      title={item.category_name}
+      leftAvatar={{
+        size: 100,
+        source: item.image && {uri: item.image},
+        title: item.category_name,
+      }}
+      onPress={() => {
+        this.props.navigation.navigate('Order_Product', {
+          category_id: item.category_id,
+        });
+      }}
+      bottomDivider
+      chevron
+    />
+  );
+
   render() {
     if (this.state.isLoading) {
       return (
@@ -62,24 +80,16 @@ export default class Project extends Component {
     const {navigation} = this.props;
 
     return (
-        <Card featuredTitle="Today's Order" >
-            <FlatList
-              data={this.state.dataSource}
-              ItemSeparatorComponent={this.FlatListItemSeparator}
-              renderItem={({item}) => (
-                <Text
-                  style={styles.FlatListItemStyle}
-                  onPress={() =>navigate('Order_Product', {
-                      category_id: item.category_id,
-                    })
-                  }>
-                  {' '}
-                  {item.category_name}{' '}
-                </Text>
-              )}
-              keyExtractor={(item, index) => index.toString()}
-            />
+      <View style={styles.MainContainer}>
+        <Card containerStyle={{padding: 0}}>
+          <FlatList
+            // keyExtractor={this.keyExtractor}
+            data={this.state.dataSource}
+            ItemSeparatorComponent={this.FlatListItemSeparator}
+            renderItem={this.renderItem}
+          />
         </Card>
+      </View>
     );
   }
 }
@@ -88,7 +98,8 @@ const styles = StyleSheet.create({
   MainContainer: {
     justifyContent: 'center',
     flex: 1,
-    margin: 10,
+    // margin: 10,
+    backgroundColor: '#ff8918',
     paddingTop: Platform.OS === 'ios' ? 20 : 0,
   },
 

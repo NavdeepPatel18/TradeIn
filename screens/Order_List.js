@@ -8,14 +8,14 @@ import {
   Alert,
   TouchableHighlight,
 } from 'react-native';
-import {Card} from 'native-base';
+import {Card, ListItem, Overlay} from 'react-native-elements';
 import * as Animatable from 'react-native-animatable';
-
 
 export default class HomeScreen extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      isVisible:true,
       quantity: 0,
       username: '',
       total_price: '',
@@ -64,9 +64,17 @@ export default class HomeScreen extends React.Component {
     const price = navigation.getParam('price', 'Nothing');
 
     return (
+      <Overlay
+        isVisible={this.state.isVisible}
+        windowBackgroundColor="rgba(255, 255, 255, .5)"
+        overlayBackgroundColor="#ff8918"
+        width="20"
+        height="50"
+        onBackdropPress={() => this.props.navigation.goBack()}  
+      >
         <Card title={product_name}>
-          <View style={styles.container}>
-            <View style={styles.cont1}>
+          <View>
+            <View>
               <Text>Weight:{weight}</Text>
               <Text>Price:{price}</Text>
               <Text>Type:</Text>
@@ -89,6 +97,7 @@ export default class HomeScreen extends React.Component {
             </TouchableHighlight>
           </View>
         </Card>
+      </Overlay>
     );
   }
 }

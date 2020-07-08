@@ -1,109 +1,115 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 
-import {  ScrollView,StyleSheet, FlatList, Text, View, Alert, ActivityIndicator, Platform} from 'react-native';
-
+import {
+  ScrollView,
+  StyleSheet,
+  FlatList,
+  Text,
+  View,
+  Alert,
+  ActivityIndicator,
+  Platform,
+} from 'react-native';
+import {Card, ListItem,} from 'react-native-elements';
 
 export default class Project extends Component {
-
-constructor(props)
-  {
+  constructor(props) {
     super(props);
 
-    this.state = { 
-    isLoading: true,
-    productName:'',
-  }
+    this.state = {
+      isLoading: true,
+      productName: '',
+    };
   }
   componentDidMount() {
-    
     return fetch('http://192.168.43.106/Ninelight/View_User.php')
       .then((response) => response.json())
       .then((responseJson) => {
-        this.setState({
-          isLoading: false,
-          dataSource: responseJson
-        }, function() {
-          // In this block you can do something with new state.
-        });
+        this.setState(
+          {
+            isLoading: false,
+            dataSource: responseJson,
+          },
+          function () {
+            // In this block you can do something with new state.
+          },
+        );
       })
       .catch((error) => {
         console.error(error);
       });
   }
 
-
-  
-FlatListItemSeparator = () => {
+  FlatListItemSeparator = () => {
     return (
       <View
         style={{
           height: 2,
-          width: "100%",
-          backgroundColor: "#ff8913",
+          width: '100%',
+          backgroundColor: '#ff8913',
         }}
       />
     );
+  };
+
+  GetFlatListItem(user_list) {
+    Alert.alert(user_list);
   }
 
-  GetFlatListItem (user_list) {
-   
-    Alert.alert(user_list);
-  
+  onClickListener = (viewId) => {
+    this.props.navigation.navigate(viewId);
+  };
+
+  keyExtractor = (item, index) => index.toString();
+
+  renderItem = ({item}) => (
+    <ListItem
+      title={item.user_name}
+      // leftAvatar={{
+      //   size: 100,
+      //   source: item.image && {uri: item.image},
+      //   title: item.product_name,
+      // }}
+      bottomDivider
+    />
+  );
+
+  render() {
+    if (this.state.isLoading) {
+      return (
+        <View style={{flex: 1, paddingTop: 20}}>
+          <ActivityIndicator />
+        </View>
+      );
     }
 
+    return (
+      <View style={styles.MainContainer}>
+        <Card containerStyle={{padding: 0}}>
+          <FlatList
+            // keyExtractor={this.keyExtractor}
+            data={this.state.dataSource}
+            ItemSeparatorComponent={this.FlatListItemSeparator}
+            renderItem={this.renderItem}
+          />
+        </Card>
+      </View>
+    );
+  }
+}
 
-    onClickListener = (viewId) => {
-      this.props.navigation.navigate(viewId);
-    }
+const styles = StyleSheet.create({
+  MainContainer: {
+    justifyContent: 'center',
+    flex: 1,
+    // margin: 10,
+    backgroundColor: '#ff8918',
+    paddingTop: Platform.OS === 'ios' ? 20 : 0,
+  },
 
-    render() {
-
-        if (this.state.isLoading) {
-          return (
-            <View style={{flex: 1, paddingTop: 20}}>
-              <ActivityIndicator />
-            </View>
-          );
-        }
-    
-        return (
-    
-    <View style={styles.MainContainer}>
-      
-           <FlatList
-           
-              data={ this.state.dataSource }
-              
-              ItemSeparatorComponent = {this.FlatListItemSeparator}
-    
-              renderItem={({item}) => <Text style={styles.FlatListItemStyle} onPress={()=>this.onClickListener('Three')} > {item.user_name}</Text>}
-            
-              keyExtractor = { (item, index) => index.toString() }
-              
-             />
-        
-        
-    </View>
-          
-        );
-      }
-    }
-
-    const styles = StyleSheet.create({
-
-        MainContainer :{
-        
-        justifyContent: 'center',
-        flex:1,
-        margin: 10,
-        paddingTop: (Platform.OS === 'ios') ? 20 : 0,
-        
-        },
-        
-        FlatListItemStyle: {
-            padding: 10,
-            fontSize: 20,
-            height: 50,
-          },
-        
-        });
+  FlatListItemStyle: {
+    padding: 10,
+    fontSize: 20,
+    height: 50,
+  },
+});

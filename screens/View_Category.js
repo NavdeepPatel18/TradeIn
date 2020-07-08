@@ -10,6 +10,9 @@ import {
   Platform,
 } from 'react-native';
 
+import {Card, ListItem,} from 'react-native-elements';
+
+
 export default class Project extends Component {
   static navigationOptions = {
     title: 'Category',
@@ -19,19 +22,17 @@ export default class Project extends Component {
 
     this.state = {
       isLoading: true,
-      dataSource:'',
+      dataSource: '',
     };
   }
   componentDidMount() {
     return fetch('http://192.168.43.106/Ninelight/View_Category.php')
       .then((response) => response.json())
       .then((responseJson) => {
-        this.setState(
-          {
-            isLoading: false,
-            dataSource: responseJson,
-          },
-        );
+        this.setState({
+          isLoading: false,
+          dataSource: responseJson,
+        });
       })
       .catch((error) => {
         console.error(error);
@@ -44,11 +45,31 @@ export default class Project extends Component {
         style={{
           height: 2,
           width: '100%',
-          backgroundColor: '#66ff00',
+          backgroundColor: '#ff8918',
         }}
       />
     );
   };
+
+  keyExtractor = (item, index) => index.toString();
+
+  renderItem = ({item}) => (
+    <ListItem
+      title={item.category_name}
+      leftAvatar={{
+        size:100,
+        source: item.image && {uri: item.image},
+        title: item.category_name,
+      }}
+      onPress={() => {
+        this.props.navigation.navigate('View_Product', {
+          category_id: item.category_id,
+        });
+      }}
+      bottomDivider
+      chevron
+    />
+  );
 
   render() {
     if (this.state.isLoading) {
@@ -63,24 +84,14 @@ export default class Project extends Component {
 
     return (
       <View style={styles.MainContainer}>
-        <View style={styles.Container}>
-          <FlatList
-            data={this.state.dataSource}
-            ItemSeparatorComponent={this.FlatListItemSeparator}
-            renderItem={({item}) => (
-              <Text
-                style={styles.FlatListItemStyle}
-                onPress={() => {
-                  this.props.navigation.navigate('View_Product', {
-                    category_id: item.category_id,
-                  });
-                }}>
-                {item.category_name}
-              </Text>
-            )}
-            keyExtractor={(item, index) => index.toString()}
-          />
-        </View>
+          <Card containerStyle={{padding: 0}}>
+            <FlatList
+              // keyExtractor={this.keyExtractor}
+              data={this.state.dataSource}
+              ItemSeparatorComponent={this.FlatListItemSeparator}
+              renderItem={this.renderItem}
+            />
+          </Card>
       </View>
     );
   }
@@ -90,7 +101,7 @@ const styles = StyleSheet.create({
   MainContainer: {
     justifyContent: 'center',
     flex: 1,
-    backgroundColor: '#C0C0C0',
+    backgroundColor: '#ff8918',
   },
   Container: {
     justifyContent: 'center',

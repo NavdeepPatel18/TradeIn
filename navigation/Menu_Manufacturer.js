@@ -224,6 +224,9 @@ const DrawerNavigatorExample = createDrawerNavigator(
       screen: View_Category_StackNavigator,
       navigationOptions: {
         drawerLabel: 'View Product',
+        drawerIcon: ({tintColor, focused}) => (
+          <Icon name="product-hunt" type="font-awesome" size={24} color={tintColor} />
+        ),
       },
     },
 
@@ -232,6 +235,9 @@ const DrawerNavigatorExample = createDrawerNavigator(
       screen: Signup_StackNavigator,
       navigationOptions: {
         drawerLabel: 'Add Distributor',
+        drawerIcon: ({tintColor, focused}) => (
+          <Icon name="user-plus" type="font-awesome" size={24} color={tintColor} />
+        ),
       },
     },
 
@@ -240,6 +246,9 @@ const DrawerNavigatorExample = createDrawerNavigator(
       screen: View_User_StackNavigator,
       navigationOptions: {
         drawerLabel: 'My Distributor',
+        drawerIcon: ({tintColor, focused}) => (
+          <Icon name="users" type="font-awesome" size={24} color={tintColor} />
+        ),
       },
     },
 
@@ -248,6 +257,9 @@ const DrawerNavigatorExample = createDrawerNavigator(
       screen: Add_Category_StackNavigator,
       navigationOptions: {
         drawerLabel: 'Add Category',
+        drawerIcon: ({tintColor, focused}) => (
+          <Icon name="plus" type="font-awesome" size={24} color={tintColor} />
+        ),
       },
     },
 
@@ -256,6 +268,9 @@ const DrawerNavigatorExample = createDrawerNavigator(
       screen: Add_Product_StackNavigator,
       navigationOptions: {
         drawerLabel: 'Add Product',
+        drawerIcon: ({tintColor, focused}) => (
+          <Icon name="plus" type="font-awesome" size={24} color={tintColor} />
+        ),
       },
     },
   },
@@ -271,7 +286,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   drawerHeader: {
-    backgroundColor: '#512DA8',
+    // backgroundColor: '#512DA8',
     height: 140,
     alignItems: 'center',
     justifyContent: 'center',

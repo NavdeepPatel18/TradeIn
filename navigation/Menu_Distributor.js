@@ -159,20 +159,14 @@ const CustomDrawerContentComponent = (props) => (
 
 const DrawerNavigatorExample = createDrawerNavigator(
   {
-    //Drawer Optons and indexing
-    // Home: {
-    //   title: 'Home',
-    //   screen: Dashboard_StackNavigator,
-    //   navigationOptions: {
-    //     drawerLabel: 'Home',
-    //   },
-    // },
-
     View_Category: {
       title: 'View Product',
       screen: View_Category_StackNavigator,
       navigationOptions: {
         drawerLabel: 'View Product',
+        drawerIcon: ({tintColor, focused}) => (
+          <Icon name="product-hunt" type="font-awesome" size={24} color={tintColor} />
+        ),
       },
     },
 
@@ -181,6 +175,9 @@ const DrawerNavigatorExample = createDrawerNavigator(
       screen: Signup_StackNavigator,
       navigationOptions: {
         drawerLabel: 'Add Shopkeeper',
+        drawerIcon: ({tintColor, focused}) => (
+          <Icon name="user-plus" type="font-awesome" size={24} color={tintColor} />
+        ),
       },
     },
 
@@ -189,6 +186,9 @@ const DrawerNavigatorExample = createDrawerNavigator(
       screen: View_User_StackNavigator,
       navigationOptions: {
         drawerLabel: 'My Shopkeeper',
+        drawerIcon: ({tintColor, focused}) => (
+          <Icon name="users" type="font-awesome" size={24} color={tintColor} />
+        ),
       },
     },
   },

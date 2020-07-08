@@ -11,14 +11,15 @@ import {
   Platform,
 } from 'react-native';
 
-export default class Project extends Component {
+import {Card, ListItem} from 'react-native-elements';
 
+export default class Project extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
       // isLoading: true,
-      dataSource:'',
+      dataSource: '',
     };
   }
   componentDidMount() {
@@ -64,6 +65,27 @@ export default class Project extends Component {
     );
   };
 
+  keyExtractor = (item, index) => index.toString();
+
+  renderItem = ({item}) => (
+    <ListItem
+      title={item.product_name}
+      subtitle={
+        <View style={styles.subtitleView}>
+          <Text style={styles.ratingText}>
+            Weight: {item.product_weight}
+          </Text>
+        </View>
+      }
+      leftAvatar={{
+        size: 100,
+        source: item.image && {uri: item.image},
+        title: item.product_name,
+      }}
+      bottomDivider
+    />
+  );
+
   render() {
     const {navigation} = this.props;
     const c_id = navigation.getParam('category_id', 'NO-ID');
@@ -76,24 +98,16 @@ export default class Project extends Component {
     }
 
     return (
-        <View style={styles.MainContainer}>
-          {/* <Text>{JSON.stringify(c_id)}</Text> */}
+      <View style={styles.MainContainer}>
+        <Card containerStyle={{padding: 0}}>
           <FlatList
+            // keyExtractor={this.keyExtractor}
             data={this.state.dataSource}
             ItemSeparatorComponent={this.FlatListItemSeparator}
-            renderItem={({item}) => (
-              <Text style={styles.FlatListItemStyle}>
-                {' '}
-                {item.product_name}
-                <Text style={styles.fonts}>
-                  {'\n'}
-                  {'\n'}Weight: {item.product_weight}
-                </Text>
-              </Text>
-            )}
-            keyExtractor={(item, index) => index.toString()}
+            renderItem={this.renderItem}
           />
-        </View>
+        </Card>
+      </View>
     );
   }
 }
@@ -102,8 +116,20 @@ const styles = StyleSheet.create({
   MainContainer: {
     justifyContent: 'center',
     flex: 1,
-    margin: 10,
+    // margin: 10,
+    backgroundColor: '#ff8918',
     paddingTop: Platform.OS === 'ios' ? 20 : 0,
+  },
+
+  subtitleView: {
+    flexDirection: 'row',
+    paddingLeft: 10,
+    paddingTop: 5
+  },
+
+  ratingText: {
+    paddingLeft: 10,
+    color: 'grey'
   },
 
   FlatListItemStyle: {
