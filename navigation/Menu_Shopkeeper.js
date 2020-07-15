@@ -20,6 +20,10 @@ import Order_Product from '../screens/Order_Product';
 import Order_List from '../screens/Order_List';
 import View_Cart from '../screens/View_Cart';
 
+import View_placed_order from '../screens/Order_shopkeeper/View_placed_order';
+import View_shopkeeper_orders from '../screens/Order_shopkeeper/View_shopkeeper_orders';
+
+
 const Dashboard_StackNavigator = createStackNavigator(
   {
     Dashboard: {screen: Dashboard},
@@ -63,6 +67,16 @@ const View_Category_StackNavigator = createStackNavigator(
 
     View_Product: {
       screen: View_Product,
+      navigationOptions: ({navigation}) => ({
+        headerStyle: {
+          backgroundColor: '#000',
+        },
+        headerTitleStyle: {
+          color: '#ff8913',
+          fontWeight: 'bold',
+        },
+        headerTintColor: '#ff8918',
+      }),
     },
   },
   {
@@ -136,6 +150,58 @@ const View_cart_StackNavigator = createStackNavigator(
           name="menu"
           size={24}
           color="white"
+          onPress={() => navigation.toggleDrawer()}
+        />
+      ),
+    }),
+  },
+);
+
+const View_placed_order_StackNavigator = createStackNavigator(
+  {
+    View_placed_order: {
+      screen: View_placed_order,
+      navigationOptions: ({navigation}) => ({
+        headerLeft: (
+          <Icon
+            name="menu"
+            size={24}
+            color="#ff8913"
+            onPress={() => navigation.toggleDrawer()}
+          />
+        ),
+      }),
+    },
+
+    View_shopkeeper_orders: {
+      screen: View_shopkeeper_orders,
+      navigationOptions: ({navigation}) => ({
+        headerStyle: {
+          backgroundColor: '#000',
+        },
+        headerTitleStyle: {
+          color: '#ff8913',
+          fontWeight: 'bold',
+        },
+        headerTintColor: '#ff8918',
+      }),
+    },
+  },
+  {
+    initialRouteName: 'View orders',
+    navigationOptions: ({navigation}) => ({
+      headerStyle: {
+        backgroundColor: '#ecf0f1',
+      },
+      headerTitleStyle: {
+        color: '#fff',
+      },
+      headerTintColor: '#fff',
+      headerLeft: (
+        <Icon
+          name="menu"
+          size={24}
+          color="#ff8913"
           onPress={() => navigation.toggleDrawer()}
         />
       ),

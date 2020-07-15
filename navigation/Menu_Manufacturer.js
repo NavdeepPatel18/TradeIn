@@ -20,6 +20,11 @@ import View_User from '../screens/View_User';
 import Add_Category from '../screens/Add_Category';
 import Add_Product from '../screens/Add_Product';
 
+import View_Order_main from '../screens/order_manufacturer/View_orders_main';
+import View_order_manufacturer from '../screens/order_manufacturer/View_order_manufacturer';
+import View_distributor_list from '../screens/order_manufacturer/View_distributor_list';
+import View_accepted_order from '../screens/order_manufacturer/View_accepted_order';
+
 const Dashboard_StackNavigator = createStackNavigator(
   {
     Dashboard: {screen: Dashboard},
@@ -63,6 +68,16 @@ const View_Category_StackNavigator = createStackNavigator(
 
     View_Product: {
       screen: View_Product,
+      navigationOptions: ({navigation}) => ({
+        headerStyle: {
+          backgroundColor: '#000',
+        },
+        headerTitleStyle: {
+          color: '#ff8913',
+          fontWeight: 'bold',
+        },
+        headerTintColor: '#ff8918',
+      }),
     },
   },
   {
@@ -187,6 +202,48 @@ const Add_Product_StackNavigator = createStackNavigator(
   },
 );
 
+const View_Order_main_StackNavigator = createStackNavigator(
+  {
+    View_Order_main: {
+      screen: View_Order_main,
+      navigationOptions: ({navigation}) => ({
+        headerLeft: (
+          <Icon
+            name="menu"
+            size={24}
+            color="#ff8913"
+            onPress={() => navigation.toggleDrawer()}
+          />
+        ),
+      }),
+    },
+
+    View_distributor_list: {
+      screen: View_distributor_list,
+    },
+
+    View_order_manufacturer: {
+      screen: View_order_manufacturer,
+    },
+
+    View_accepted_order: {
+      screen: View_accepted_order,
+    },
+  },
+  {
+    initialRouteName: 'View_Order_main',
+    navigationOptions: ({navigation}) => ({
+      headerStyle: {
+        backgroundColor: '#ecf0f1',
+      },
+      headerTitleStyle: {
+        color: '#fff',
+      },
+      headerTintColor: '#fff',
+    }),
+  },
+);
+
 const CustomDrawerContentComponent = (props) => (
   <ScrollView>
     <SafeAreaProvider>
@@ -270,6 +327,17 @@ const DrawerNavigatorExample = createDrawerNavigator(
         drawerLabel: 'Add Product',
         drawerIcon: ({tintColor, focused}) => (
           <Icon name="plus" type="font-awesome" size={24} color={tintColor} />
+        ),
+      },
+    },
+
+    View_Order_main: {
+      //Title
+      screen: View_Order_main_StackNavigator,
+      navigationOptions: {
+        drawerLabel: 'View Order',
+        drawerIcon: ({tintColor, focused}) => (
+          <Icon name="product-hunt" type="font-awesome" size={24} color={tintColor} />
         ),
       },
     },
