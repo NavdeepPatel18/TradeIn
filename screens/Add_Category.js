@@ -16,6 +16,11 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Entypo from 'react-native-vector-icons/Entypo';
 
 export default class SignUpView extends Component {
+
+  static navigationOptions = {
+    title: 'Add Category',
+  };
+  
   onClickListener = (viewId) => {
     this.props.navigation.navigate(viewId);
   };

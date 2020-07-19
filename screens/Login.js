@@ -17,8 +17,8 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Entypo from 'react-native-vector-icons/Entypo';
 
 export default class SignUpView extends Component {
-  onClickListener = (viewId) => {
-    this.props.navigation.navigate(viewId);
+  onClickListener = (viewId, data) => {
+    this.props.navigation.navigate(viewId, {item: this.state.dataSource});
   };
 
   constructor(props) {
@@ -44,16 +44,20 @@ export default class SignUpView extends Component {
       .then((response) => response.json())
 
       .then((responseJson) => {
+        this.setState({
+          isLoading: false,
+          dataSource: responseJson,
+        });
         // If server response message same as Data Matched
-        if (responseJson == 1) {
+        if (this.state.dataSource.user_type == 1) {
           //Then open Profile activity and send user email to profile activity.
-          this.onClickListener('Menu_Shopkeeper');
-        } else if (responseJson == 2) {
+          this.onClickListener('Menu_Shopkeeper', this.state.dataSource);
+        } else if (this.state.dataSource.user_type == 2) {
           //Then open Profile activity and send user email to profile activity.
-          this.onClickListener('Menu_Distributor');
-        } else if (responseJson == 3) {
+          this.onClickListener('Menu_Distributor', this.state.dataSource);
+        } else if (this.state.dataSource.user_type == 3) {
           //Then open Profile activity and send user email to profile activity.
-          this.onClickListener('Menu_Manufacturer');
+          this.onClickListener('Menu_Manufacturer', this.state.dataSource);
         } else {
           Alert.alert(responseJson);
         }
@@ -64,49 +68,53 @@ export default class SignUpView extends Component {
   };
 
   render() {
-
-    const baseUrl='https://www.balajiwafers.com/wp-content/themes/custom/img/BalajiWafers.svg';
+    const baseUrl =
+      'https://www.balajiwafers.com/wp-content/themes/custom/img/BalajiWafers.svg';
     return (
       <View style={styles.container}>
         <View style={styles.center}>
           <Card
             // title='Balaji'
             image={require('../image/Balaji.jpg')}
-            imageStyle={{ width: 200, height: 200 }}
-          >
+            imageStyle={{width: 200, height: 200}}>
             <View style={styles.inputContainer}>
-            <Icon raised name="envelope" type="font-awesome" color="#ff8913" />
-            <TextInput
-              style={styles.inputs}
-              placeholder="Email"
-              keyboardType="email-address"
-              underlineColorAndroid="transparent"
-              onChangeText={(email_id) =>
-                this.setState({
-                  email_id,
-                })
-              }
-            />
-          </View>
-          <View style={styles.inputContainer}>
-            <Icon raised name="key" type="font-awesome" color="#ff8913" />
-            <TextInput
-              style={styles.inputs}
-              placeholder="Password"
-              secureTextEntry={true}
-              underlineColorAndroid="transparent"
-              onChangeText={(password) =>
-                this.setState({
-                  password,
-                })
-              }
-            />
-          </View>
-          <TouchableHighlight
-            style={[styles.loginbuttonContainer, styles.loginButton]}
-            onPress={this.CheckLogin}>
-            <Text style={styles.signUpText}> Login </Text>
-          </TouchableHighlight>
+              <Icon
+                raised
+                name="envelope"
+                type="font-awesome"
+                color="#ff8913"
+              />
+              <TextInput
+                style={styles.inputs}
+                placeholder="Email"
+                keyboardType="email-address"
+                underlineColorAndroid="transparent"
+                onChangeText={(email_id) =>
+                  this.setState({
+                    email_id,
+                  })
+                }
+              />
+            </View>
+            <View style={styles.inputContainer}>
+              <Icon raised name="key" type="font-awesome" color="#ff8913" />
+              <TextInput
+                style={styles.inputs}
+                placeholder="Password"
+                secureTextEntry={true}
+                underlineColorAndroid="transparent"
+                onChangeText={(password) =>
+                  this.setState({
+                    password,
+                  })
+                }
+              />
+            </View>
+            <TouchableHighlight
+              style={[styles.loginbuttonContainer, styles.loginButton]}
+              onPress={this.CheckLogin}>
+              <Text style={styles.signUpText}> Login </Text>
+            </TouchableHighlight>
             <Text style={{marginLeft: 50}}>Balaji Wafers & Namkeens</Text>
           </Card>
         </View>

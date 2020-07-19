@@ -9,8 +9,10 @@ import {
   Alert,
   Picker,
 } from 'react-native';
+import {Icon, Avatar} from 'react-native-elements';
 
 export default class SignUpView extends Component {
+
   onClickListener = (viewId) => {
     this.props.navigation.navigate(viewId);
   };
@@ -124,186 +126,182 @@ export default class SignUpView extends Component {
   };
   render() {
     return (
-        <View style={styles.container}>
-          <ScrollView showsVerticalScrollIndicator={false}>
-            <View style={styles.scroll}>
-              <View style={styles.inputContainer}>
-                <TextInput
-                  style={styles.inputs}
-                  placeholder="First Name"
-                  keyboardType="default"
-                  underlineColorAndroid="transparent"
-                  onChangeText={(first_name) => this.setState({first_name})}
-                />
-              </View>
-
-              <View style={styles.inputContainer}>
-                <TextInput
-                  style={styles.inputs}
-                  placeholder="Last Name"
-                  keyboardType="default"
-                  underlineColorAndroid="transparent"
-                  onChangeText={(last_name) => this.setState({last_name})}
-                />
-              </View>
-
-              <View style={styles.inputContainer}>
-                <TextInput
-                  style={styles.inputs}
-                  placeholder="User Name"
-                  keyboardType="default"
-                  underlineColorAndroid="transparent"
-                  onChangeText={(user_name) => this.setState({user_name})}
-                />
-              </View>
-
-              <View style={styles.inputContainer}>
-                <TextInput
-                  style={styles.inputs}
-                  placeholder="Email ID"
-                  keyboardType="email-address"
-                  underlineColorAndroid="transparent"
-                  onChangeText={(email_id) => this.setState({email_id})}
-                />
-              </View>
-
-              <View style={styles.inputContainer}>
-                <TextInput
-                  style={styles.inputs}
-                  placeholder="Password"
-                  secureTextEntry={true}
-                  underlineColorAndroid="transparent"
-                  onChangeText={(password) => this.setState({password})}
-                />
-              </View>
-
-              <View style={styles.inputContainer}>
-                <TextInput
-                  style={styles.inputs}
-                  placeholder="Confirm Password"
-                  secureTextEntry={true}
-                  underlineColorAndroid="transparent"
-                  onChangeText={(confpassword) => this.setState({confpassword})}
-                />
-              </View>
-
-              <View style={styles.inputContainer}>
-                <TextInput
-                  style={styles.inputs}
-                  placeholder="Phone No."
-                  keyboardType="numeric"
-                  underlineColorAndroid="transparent"
-                  onChangeText={(phone_no) => this.setState({phone_no})}
-                />
-              </View>
-
-              <View style={styles.inputContainer}>
-                <TextInput
-                  style={styles.inputs}
-                  placeholder="Area and Street"
-                  keyboardType="default"
-                  underlineColorAndroid="transparent"
-                  onChangeText={(area_street) => this.setState({area_street})}
-                />
-              </View>
-
-              <View style={styles.inputContainer}>
-                <TextInput
-                  style={styles.inputs}
-                  placeholder="Village"
-                  keyboardType="default"
-                  underlineColorAndroid="transparent"
-                  onChangeText={(village) => this.setState({village})}
-                />
-              </View>
-
-              <View style={styles.inputContainer}>
-                <TextInput
-                  style={styles.inputs}
-                  placeholder="City Or Town"
-                  keyboardType="default"
-                  underlineColorAndroid="transparent"
-                  onChangeText={(city) => this.setState({city})}
-                />
-              </View>
-
-              <View style={styles.inputContainer}>
-                <Picker
-                  style={styles.Picker}
-                  selectedValue={this.state.district}
-                  onValueChange={(itemValue, itemIndex) =>
-                    this.setState({district: itemValue})
-                  }>
-                  <Picker.Item
-                    label="Select your district"
-                    value=""></Picker.Item>
-                  <Picker.Item label="Junagadh" value="Junagadh"></Picker.Item>
-                  <Picker.Item
-                    style={styles.itempick}
-                    label="Rajkot"
-                    value="Rajkot"></Picker.Item>
-                  <Picker.Item
-                    label="Ahmedabad"
-                    value="Ahmedabad"></Picker.Item>
-                  <Picker.Item label="Nadiad" value="Nadiad"></Picker.Item>
-                  <Picker.Item label="Anand" value="Anand"></Picker.Item>
-                  <Picker.Item label="Vadodara" value="Vadodara"></Picker.Item>
-                </Picker>
-              </View>
-
-              <View style={styles.inputContainer}>
-                <Picker
-                  style={styles.Picker}
-                  selectedValue={this.state.state}
-                  onValueChange={(itemValue, itemIndex) =>
-                    this.setState({state: itemValue})
-                  }>
-                  <Picker.Item label="Select your state" value=""></Picker.Item>
-                  <Picker.Item label="Gujarat" value="Gujarat"></Picker.Item>
-                </Picker>
-              </View>
-
-              <View style={styles.inputContainer}>
-                <Picker
-                  style={styles.Picker}
-                  selectedValue={this.state.country}
-                  onValueChange={(itemValue, itemIndex) =>
-                    this.setState({country: itemValue})
-                  }>
-                  <Picker.Item
-                    label="Select your country"
-                    value=""></Picker.Item>
-                  <Picker.Item label="India" value="India"></Picker.Item>
-                </Picker>
-              </View>
-
-              <View style={styles.inputContainer}>
-                <TextInput
-                  style={styles.inputs}
-                  placeholder="Pincode"
-                  keyboardType="numeric"
-                  underlineColorAndroid="transparent"
-                  onChangeText={(pincode) => this.setState({pincode})}
-                />
-              </View>
-              <View style={styles.inputContainer}>
-                <TextInput
-                  style={styles.inputs}
-                  placeholder="Shopname"
-                  keyboardType="default"
-                  underlineColorAndroid="transparent"
-                  onChangeText={(shop_name) => this.setState({shop_name})}
-                />
-              </View>
-
-              <TouchableHighlight
-                style={[styles.buttonContainer, styles.signupButton]}
-                onPress={this.checkdetail}>
-                <Text style={styles.signUpText}>Sign up</Text>
-              </TouchableHighlight>
+      <View style={styles.container}>
+        <ScrollView showsVerticalScrollIndicator={false}>
+          <View style={styles.scroll}>
+            <View style={styles.inputContainer}>
+              <TextInput
+                style={styles.inputs}
+                placeholder="First Name"
+                keyboardType="default"
+                underlineColorAndroid="transparent"
+                onChangeText={(first_name) => this.setState({first_name})}
+              />
             </View>
-          </ScrollView>
-        </View>
+
+            <View style={styles.inputContainer}>
+              <TextInput
+                style={styles.inputs}
+                placeholder="Last Name"
+                keyboardType="default"
+                underlineColorAndroid="transparent"
+                onChangeText={(last_name) => this.setState({last_name})}
+              />
+            </View>
+
+            <View style={styles.inputContainer}>
+              <TextInput
+                style={styles.inputs}
+                placeholder="User Name"
+                keyboardType="default"
+                underlineColorAndroid="transparent"
+                onChangeText={(user_name) => this.setState({user_name})}
+              />
+            </View>
+
+            <View style={styles.inputContainer}>
+              <TextInput
+                style={styles.inputs}
+                placeholder="Email ID"
+                keyboardType="email-address"
+                underlineColorAndroid="transparent"
+                onChangeText={(email_id) => this.setState({email_id})}
+              />
+            </View>
+
+            <View style={styles.inputContainer}>
+              <TextInput
+                style={styles.inputs}
+                placeholder="Password"
+                secureTextEntry={true}
+                underlineColorAndroid="transparent"
+                onChangeText={(password) => this.setState({password})}
+              />
+            </View>
+
+            <View style={styles.inputContainer}>
+              <TextInput
+                style={styles.inputs}
+                placeholder="Confirm Password"
+                secureTextEntry={true}
+                underlineColorAndroid="transparent"
+                onChangeText={(confpassword) => this.setState({confpassword})}
+              />
+            </View>
+
+            <View style={styles.inputContainer}>
+              <TextInput
+                style={styles.inputs}
+                placeholder="Phone No."
+                keyboardType="numeric"
+                underlineColorAndroid="transparent"
+                onChangeText={(phone_no) => this.setState({phone_no})}
+              />
+            </View>
+
+            <View style={styles.inputContainer}>
+              <TextInput
+                style={styles.inputs}
+                placeholder="Area and Street"
+                keyboardType="default"
+                underlineColorAndroid="transparent"
+                onChangeText={(area_street) => this.setState({area_street})}
+              />
+            </View>
+
+            <View style={styles.inputContainer}>
+              <TextInput
+                style={styles.inputs}
+                placeholder="Village"
+                keyboardType="default"
+                underlineColorAndroid="transparent"
+                onChangeText={(village) => this.setState({village})}
+              />
+            </View>
+
+            <View style={styles.inputContainer}>
+              <TextInput
+                style={styles.inputs}
+                placeholder="City Or Town"
+                keyboardType="default"
+                underlineColorAndroid="transparent"
+                onChangeText={(city) => this.setState({city})}
+              />
+            </View>
+
+            <View style={styles.inputContainer}>
+              <Picker
+                style={styles.Picker}
+                selectedValue={this.state.district}
+                onValueChange={(itemValue, itemIndex) =>
+                  this.setState({district: itemValue})
+                }>
+                <Picker.Item
+                  label="Select your district"
+                  value=""></Picker.Item>
+                <Picker.Item label="Junagadh" value="Junagadh"></Picker.Item>
+                <Picker.Item
+                  style={styles.itempick}
+                  label="Rajkot"
+                  value="Rajkot"></Picker.Item>
+                <Picker.Item label="Ahmedabad" value="Ahmedabad"></Picker.Item>
+                <Picker.Item label="Nadiad" value="Nadiad"></Picker.Item>
+                <Picker.Item label="Anand" value="Anand"></Picker.Item>
+                <Picker.Item label="Vadodara" value="Vadodara"></Picker.Item>
+              </Picker>
+            </View>
+
+            <View style={styles.inputContainer}>
+              <Picker
+                style={styles.Picker}
+                selectedValue={this.state.state}
+                onValueChange={(itemValue, itemIndex) =>
+                  this.setState({state: itemValue})
+                }>
+                <Picker.Item label="Select your state" value=""></Picker.Item>
+                <Picker.Item label="Gujarat" value="Gujarat"></Picker.Item>
+              </Picker>
+            </View>
+
+            <View style={styles.inputContainer}>
+              <Picker
+                style={styles.Picker}
+                selectedValue={this.state.country}
+                onValueChange={(itemValue, itemIndex) =>
+                  this.setState({country: itemValue})
+                }>
+                <Picker.Item label="Select your country" value=""></Picker.Item>
+                <Picker.Item label="India" value="India"></Picker.Item>
+              </Picker>
+            </View>
+
+            <View style={styles.inputContainer}>
+              <TextInput
+                style={styles.inputs}
+                placeholder="Pincode"
+                keyboardType="numeric"
+                underlineColorAndroid="transparent"
+                onChangeText={(pincode) => this.setState({pincode})}
+              />
+            </View>
+            <View style={styles.inputContainer}>
+              <TextInput
+                style={styles.inputs}
+                placeholder="Shopname"
+                keyboardType="default"
+                underlineColorAndroid="transparent"
+                onChangeText={(shop_name) => this.setState({shop_name})}
+              />
+            </View>
+
+            <TouchableHighlight
+              style={[styles.buttonContainer, styles.signupButton]}
+              onPress={this.checkdetail}>
+              <Text style={styles.signUpText}>Sign up</Text>
+            </TouchableHighlight>
+          </View>
+        </ScrollView>
+      </View>
     );
   }
 }
