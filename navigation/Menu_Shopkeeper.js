@@ -1,12 +1,13 @@
 import React, {Component} from 'react';
 import {
   View,
+  Text,
   Image,
   TouchableOpacity,
   StyleSheet,
   ScrollView,
 } from 'react-native';
-import {Icon} from 'react-native-elements';
+import {Icon, Avatar} from 'react-native-elements';
 import {createAppContainer} from 'react-navigation';
 import {createDrawerNavigator, DrawerItems} from 'react-navigation-drawer';
 import {createStackNavigator} from 'react-navigation-stack';
@@ -25,6 +26,12 @@ import Edit_Profile from '../screens/Edit_profile';
 
 import View_placed_order from '../screens/Order_shopkeeper/View_placed_order';
 import View_shopkeeper_orders from '../screens/Order_shopkeeper/View_shopkeeper_orders';
+
+import Report from '../screens/Report/Report';
+import Weekly_Report from '../screens/Report/Weekly_Report';
+import Monthly_Report from '../screens/Report/Monthly_Report';
+import Yearly_Report from '../screens/Report/Yearly_Report';
+import Rejan from '../screens/Report/Rejan';
 
 const Dashboard_StackNavigator = createStackNavigator(
   {
@@ -255,6 +262,52 @@ const View_Profile_StackNavigator = createStackNavigator(
   },
 );
 
+const Report_StackNavigator = createStackNavigator(
+  {
+    Report: {
+      screen: Report,
+      navigationOptions: ({navigation}) => ({
+        headerLeft: (
+          <Icon
+            name="menu"
+            size={24}
+            color="#ff8913"
+            onPress={() => navigation.toggleDrawer()}
+          />
+        ),
+      }),
+    },
+
+    Weekly_Report: {
+      screen: Weekly_Report,
+    },
+
+    Monthly_Report: {
+      screen: Monthly_Report,
+    },
+
+    Yearly_Report: {
+      screen: Yearly_Report,
+    },
+
+    Rejan: {
+      screen: Rejan,
+    },
+  },
+  {
+    initialRouteName: 'Report',
+    navigationOptions: ({navigation}) => ({
+      headerStyle: {
+        backgroundColor: '#ecf0f1',
+      },
+      headerTitleStyle: {
+        color: '#fff',
+      },
+      headerTintColor: '#fff',
+    }),
+  },
+);
+
 function CustomDrawerContentComponent(props) {
   const {navigation} = props;
   const user = navigation.getParam('item', 'NO-ID');
@@ -370,6 +423,22 @@ const DrawerNavigatorExample = createDrawerNavigator(
           <Icon
             name="shopping-cart"
             type="font-awesome"
+            size={24}
+            color={tintColor}
+          />
+        ),
+      },
+    },
+
+    Report: {
+      //Title
+      screen: Report_StackNavigator,
+      navigationOptions: {
+        drawerLabel: 'Report',
+        drawerIcon: ({tintColor, focused}) => (
+          <Icon
+            name="chart-pie"
+            type="font-awesome-5"
             size={24}
             color={tintColor}
           />
