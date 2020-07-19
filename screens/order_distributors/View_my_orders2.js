@@ -11,6 +11,7 @@ import {
   Platform,
   TouchableHighlight,
 } from 'react-native';
+import {Card} from 'react-native-elements';
 
 export default class Project extends Component {
   static navigationOptions = {
@@ -94,22 +95,24 @@ export default class Project extends Component {
 
     return (
       <View style={styles.MainContainer}>
-        <FlatList
-          Vertical={true}
-          data={this.state.dataSource}
-          ItemSeparatorComponent={this.FlatListItemSeparator}
-          renderItem={({item}) => (
-            <Text style={styles.FlatListItemStyle}>
-              {' '}
-              {item.product_name}
-              <Text style={styles.fonts}>
-                {'\n'}
-                {'\n'}quantity: {item.quantity} Total Price {item.total_price}{' '}
+        <Card>
+          <FlatList
+            Vertical={true}
+            data={this.state.dataSource}
+            ItemSeparatorComponent={this.FlatListItemSeparator}
+            renderItem={({item}) => (
+              <Text style={styles.FlatListItemStyle}>
+                {' '}
+                {item.product_name}
+                <Text style={styles.fonts}>
+                  {'\n'}
+                  {'\n'}quantity: {item.quantity} Total Price {item.total_price}{' '}
+                </Text>
               </Text>
-            </Text>
-          )}
-          keyExtractor={(item, index) => index.toString()}
-        />
+            )}
+            keyExtractor={(item, index) => index.toString()}
+          />
+        </Card>
       </View>
     );
   }

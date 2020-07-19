@@ -5,41 +5,65 @@ import {
   TouchableHighlight,
   Text,
   View,
+  FlatList,
   Alert,
   ActivityIndicator,
   Platform,
 } from "react-native";
+import {Card, ListItem,} from 'react-native-elements';
 
 export default class Project extends Component {
+  
+
+  FlatListItemSeparator = () => {
+    return (
+      <View
+        style={{
+          height: 2,
+          width: '100%',
+          backgroundColor: '#ff8918',
+        }}
+      />
+    );
+  };
+
+  keyExtractor = (item, index) => index.toString();
+
+  renderItem = ({item}) => (
+    <ListItem
+      title={item.name}
+      onPress={() => {
+        this.props.navigation.navigate('View_distributor_list', {
+          no_id: item.no_id,
+        });
+      }}
+      bottomDivider
+      chevron
+    />
+  );
  
   render() {
+    const list = [
+      {
+        no_id: 1,
+        name:'New Orders',
+      },
+      {
+        no_id: 2,
+        name:'Accepted Orders',
+
+      },
+    ]
     return (
       <View style={styles.MainContainer}>
-        <View>
-          <TouchableHighlight
-            style={[styles.buttonContainer, styles.signupButton]}
-            onPress={() =>
-              this.props.navigation.navigate("View_distributor_list", {
-                no_id: 1,
-              })
-            }
-          >
-            <Text style={styles.signUpText}>New Orders</Text>
-          </TouchableHighlight>
-        </View>
-
-        <View>
-          <TouchableHighlight
-            style={[styles.buttonContainer, styles.signupButton]}
-            onPress={() =>
-              this.props.navigation.navigate("View_distributor_list", {
-                no_id: 2,
-              })
-            }
-          >
-            <Text style={styles.signUpText}>Accepted Orders</Text>
-          </TouchableHighlight>
-        </View>
+          <Card containerStyle={{padding: 0}}>
+            <FlatList
+              // keyExtractor={this.keyExtractor}
+              data={list}
+              ItemSeparatorComponent={this.FlatListItemSeparator}
+              renderItem={this.renderItem}
+            />
+          </Card>
       </View>
     );
   }
@@ -47,34 +71,22 @@ export default class Project extends Component {
 
 const styles = StyleSheet.create({
   MainContainer: {
-    backgroundColor: "#ecf0f1",
-    justifyContent: "center",
+    justifyContent: 'center',
     flex: 1,
-    paddingTop: Platform.OS === "ios" ? 20 : 0,
+    backgroundColor: '#ff8918',
+  },
+  Container: {
+    justifyContent: 'center',
+    flex: 1,
+    margin: 10,
+    // backgroundColor:'#696969',
+    color: '#008080',
+    paddingTop: Platform.OS === 'ios' ? 20 : 0,
   },
 
   FlatListItemStyle: {
     padding: 10,
     fontSize: 20,
     height: 50,
-  },
-
-  buttonContainer: {
-    height: 150,
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center",
-    marginBottom: 20,
-    marginTop: 20,
-    width: 170,
-    borderRadius: 30,
-    marginLeft: "25%",
-  },
-  signupButton: {
-    backgroundColor: "#FF8913",
-  },
-  signUpText: {
-    fontSize: 20,
-    color: "white",
   },
 });

@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, {Component} from 'react';
 
 import {
   ScrollView,
@@ -10,17 +10,18 @@ import {
   ActivityIndicator,
   Platform,
   TouchableHighlight,
-} from "react-native";
+} from 'react-native';
+import {Card} from 'react-native-elements';
 
 export default class Project extends Component {
   static navigationOptions = {
-    title: "Products",
+    title: 'Products',
     headerStyle: {
-      backgroundColor: "#f4511e",
+      backgroundColor: '#f4511e',
     },
 
     headerTitleStyle: {
-      fontWeight: "bold",
+      fontWeight: 'bold',
     },
   };
 
@@ -33,21 +34,21 @@ export default class Project extends Component {
   }
 
   order = () => {
-    const { navigation } = this.props;
-    const d_id = navigation.getParam("distributor_id", "NO-User");
+    const {navigation} = this.props;
+    const d_id = navigation.getParam('distributor_id', 'NO-User');
 
     return fetch(
-      "http://192.168.43.161/Ninelight/Manufacturer_order/Order_manufacturer.php",
+      'http://192.168.43.161/Ninelight/Manufacturer_order/Order_manufacturer.php',
       {
-        method: "POST",
+        method: 'POST',
         headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify({
           distributor_id: d_id,
         }),
-      }
+      },
     )
       .then((response) => response.json())
       .then((responseJson) => {
@@ -60,26 +61,26 @@ export default class Project extends Component {
   };
 
   componentDidMount() {
-    const { navigation } = this.props;
-    const d_id = navigation.getParam("distributor_id", "NO-User");
+    const {navigation} = this.props;
+    const d_id = navigation.getParam('distributor_id', 'NO-User');
 
     return fetch(
-      "http://192.168.43.161/Ninelight/Manufacturer_order/View_order_manufacturer.php",
+      'http://192.168.43.161/Ninelight/Manufacturer_order/View_order_manufacturer.php',
       {
-        method: "POST",
+        method: 'POST',
         headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify({
           distributor_id: d_id,
         }),
-      }
+      },
     )
       .then((response) => response.json())
       .then((responseJson) => {
-        if (responseJson === "NO") {
-          Alert.alert("No orders!!");
+        if (responseJson === 'NO') {
+          Alert.alert('No orders!!');
         } else {
           this.setState(
             {
@@ -88,7 +89,7 @@ export default class Project extends Component {
             },
             function () {
               // In this block you can do something with new state.
-            }
+            },
           );
         }
       })
@@ -102,9 +103,9 @@ export default class Project extends Component {
       <View
         style={{
           height: 2,
-          width: "100%",
+          width: '100%',
 
-          backgroundColor: "#ff8913",
+          backgroundColor: '#ff8913',
         }}
       />
     );
@@ -113,7 +114,7 @@ export default class Project extends Component {
   render() {
     if (this.state.isLoading) {
       return (
-        <View style={{ flex: 1, paddingTop: 20 }}>
+        <View style={{flex: 1, paddingTop: 20}}>
           <ActivityIndicator />
         </View>
       );
@@ -121,31 +122,32 @@ export default class Project extends Component {
 
     return (
       <View style={styles.MainContainer}>
-        <FlatList
-          Vertical={true}
-          data={this.state.dataSource}
-          ItemSeparatorComponent={this.FlatListItemSeparator}
-          renderItem={({ item }) => (
-            <Text style={styles.FlatListItemStyle}>
-              {" "}
-              {item.product_name}
-              <Text style={styles.fonts}>
-                {"\n"}
-                {"\n"}quantity: {item.quantity} Total Price:{item.total}{" "}
+        <Card>
+          <FlatList
+            Vertical={true}
+            data={this.state.dataSource}
+            ItemSeparatorComponent={this.FlatListItemSeparator}
+            renderItem={({item}) => (
+              <Text style={styles.FlatListItemStyle}>
+                {' '}
+                {item.product_name}
+                <Text style={styles.fonts}>
+                  {'\n'}
+                  {'\n'}quantity: {item.quantity} Total Price:{item.total}{' '}
+                </Text>
               </Text>
-            </Text>
-          )}
-          keyExtractor={(item, index) => index.toString()}
-        />
+            )}
+            keyExtractor={(item, index) => index.toString()}
+          />
 
-        <View>
-          <TouchableHighlight
-            style={[styles.buttonContainer, styles.signupButton]}
-            onPress={this.order}
-          >
-            <Text style={styles.signUpText}>Accept Orders</Text>
-          </TouchableHighlight>
-        </View>
+          <View>
+            <TouchableHighlight
+              style={[styles.buttonContainer, styles.signupButton]}
+              onPress={this.order}>
+              <Text style={styles.signUpText}>Accept Orders</Text>
+            </TouchableHighlight>
+          </View>
+        </Card>
       </View>
     );
   }
@@ -154,45 +156,45 @@ export default class Project extends Component {
 const styles = StyleSheet.create({
   buttonContainer: {
     height: 50,
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center",
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
     marginBottom: 20,
     marginTop: 20,
     width: 150,
     borderRadius: 30,
-    marginLeft: "28%",
+    marginLeft: '28%',
   },
   signupButton: {
-    backgroundColor: "#FF8913",
+    backgroundColor: '#FF8913',
   },
   signUpText: {
-    color: "white",
+    color: 'white',
   },
 
   buttonContainer2: {
     height: 50,
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center",
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
     marginBottom: 20,
     marginTop: 20,
     width: 150,
     borderRadius: 30,
-    marginLeft: "28%",
+    marginLeft: '28%',
   },
   signupButton2: {
-    backgroundColor: "#FF8913",
+    backgroundColor: '#FF8913',
   },
   signUpText2: {
-    color: "white",
+    color: 'white',
   },
   MainContainer: {
-    justifyContent: "center",
+    justifyContent: 'center',
     flex: 1,
-    backgroundColor: "#ecf0f1",
+    backgroundColor: '#ecf0f1',
 
-    paddingTop: Platform.OS === "ios" ? 20 : 0,
+    paddingTop: Platform.OS === 'ios' ? 20 : 0,
   },
 
   FlatListItemStyle: {

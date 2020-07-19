@@ -87,8 +87,6 @@ export default class Project extends Component {
   );
 
   render() {
-    const {navigation} = this.props;
-    const c_id = navigation.getParam('category_id', 'NO-ID');
     if (this.state.isLoading) {
       return (
         <View style={{flex: 1, paddingTop: 20}}>
