@@ -22,7 +22,7 @@ export default class SignUpView extends Component {
     },
   };
 
-  onClickListener = viewId => {
+  onClickListener = (viewId) => {
     this.props.navigation.navigate(viewId);
   };
 
@@ -124,11 +124,11 @@ export default class SignUpView extends Component {
           shop_name: this.state.shop_name,
         }),
       })
-        .then(response => response.json())
-        .then(responseJson => {
+        .then((response) => response.json())
+        .then((responseJson) => {
           Alert.alert(responseJson);
         })
-        .catch(error => {
+        .catch((error) => {
           console.error(error);
         });
     }
@@ -144,7 +144,7 @@ export default class SignUpView extends Component {
                 placeholder="First Name"
                 keyboardType="default"
                 underlineColorAndroid="transparent"
-                onChangeText={first_name => this.setState({first_name})}
+                onChangeText={(first_name) => this.setState({first_name})}
               />
             </View>
 
@@ -154,7 +154,7 @@ export default class SignUpView extends Component {
                 placeholder="Last Name"
                 keyboardType="default"
                 underlineColorAndroid="transparent"
-                onChangeText={last_name => this.setState({last_name})}
+                onChangeText={(last_name) => this.setState({last_name})}
               />
             </View>
 
@@ -164,7 +164,7 @@ export default class SignUpView extends Component {
                 placeholder="User Name"
                 keyboardType="default"
                 underlineColorAndroid="transparent"
-                onChangeText={user_name => this.setState({user_name})}
+                onChangeText={(user_name) => this.setState({user_name})}
               />
             </View>
 
@@ -174,7 +174,7 @@ export default class SignUpView extends Component {
                 placeholder="Email ID"
                 keyboardType="email-address"
                 underlineColorAndroid="transparent"
-                onChangeText={email_id => this.setState({email_id})}
+                onChangeText={(email_id) => this.setState({email_id})}
               />
             </View>
 
@@ -184,7 +184,7 @@ export default class SignUpView extends Component {
                 placeholder="Password"
                 secureTextEntry={true}
                 underlineColorAndroid="transparent"
-                onChangeText={password => this.setState({password})}
+                onChangeText={(password) => this.setState({password})}
               />
             </View>
 
@@ -194,7 +194,7 @@ export default class SignUpView extends Component {
                 placeholder="Confirm Password"
                 secureTextEntry={true}
                 underlineColorAndroid="transparent"
-                onChangeText={confpassword => this.setState({confpassword})}
+                onChangeText={(confpassword) => this.setState({confpassword})}
               />
             </View>
 
@@ -204,7 +204,7 @@ export default class SignUpView extends Component {
                 placeholder="Phone No."
                 keyboardType="numeric"
                 underlineColorAndroid="transparent"
-                onChangeText={phone_no => this.setState({phone_no})}
+                onChangeText={(phone_no) => this.setState({phone_no})}
               />
             </View>
 
@@ -214,7 +214,7 @@ export default class SignUpView extends Component {
                 placeholder="Area and Street"
                 keyboardType="default"
                 underlineColorAndroid="transparent"
-                onChangeText={area_street => this.setState({area_street})}
+                onChangeText={(area_street) => this.setState({area_street})}
               />
             </View>
 
@@ -224,7 +224,7 @@ export default class SignUpView extends Component {
                 placeholder="Village"
                 keyboardType="default"
                 underlineColorAndroid="transparent"
-                onChangeText={village => this.setState({village})}
+                onChangeText={(village) => this.setState({village})}
               />
             </View>
 
@@ -234,7 +234,7 @@ export default class SignUpView extends Component {
                 placeholder="City Or Town"
                 keyboardType="default"
                 underlineColorAndroid="transparent"
-                onChangeText={city => this.setState({city})}
+                onChangeText={(city) => this.setState({city})}
               />
             </View>
 
@@ -289,7 +289,7 @@ export default class SignUpView extends Component {
                 placeholder="Pincode"
                 keyboardType="numeric"
                 underlineColorAndroid="transparent"
-                onChangeText={pincode => this.setState({pincode})}
+                onChangeText={(pincode) => this.setState({pincode})}
               />
             </View>
 
@@ -299,7 +299,7 @@ export default class SignUpView extends Component {
                 placeholder="Shopname"
                 keyboardType="default"
                 underlineColorAndroid="transparent"
-                onChangeText={shop_name => this.setState({shop_name})}
+                onChangeText={(shop_name) => this.setState({shop_name})}
               />
             </View>
 
