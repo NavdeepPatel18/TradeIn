@@ -1,16 +1,18 @@
 import React, {Component} from 'react';
 import {
   View,
+  Text,
   Image,
   TouchableOpacity,
   StyleSheet,
   ScrollView,
 } from 'react-native';
-import {Icon} from 'react-native-elements';
+import {Icon, Avatar} from 'react-native-elements';
 import {createAppContainer} from 'react-navigation';
 import {createDrawerNavigator, DrawerItems} from 'react-navigation-drawer';
 import {createStackNavigator} from 'react-navigation-stack';
 import {SafeAreaProvider, SafeAreaView} from 'react-native-safe-area-context';
+import {ListItem} from 'react-native-elements';
 
 import Dashboard from './Dashboard_Manufacturer';
 import View_Category from '../screens/View_Category';
@@ -19,6 +21,8 @@ import Signup from '../screens/Signup';
 import View_User from '../screens/View_User';
 import Add_Category from '../screens/Add_Category';
 import Add_Product from '../screens/Add_Product';
+import View_Profile from '../screens/View_profile';
+import Edit_Profile from '../screens/Edit_profile';
 
 import View_Order_main from '../screens/order_manufacturer/View_orders_main';
 import View_order_manufacturer from '../screens/order_manufacturer/View_order_manufacturer';
@@ -102,11 +106,9 @@ const View_Category_StackNavigator = createStackNavigator(
   },
 );
 
-const Signup_StackNavigator = createStackNavigator(
-  {
-    Signup: {screen: Signup},
-  },
-  {
+const Signup_StackNavigator = createStackNavigator({
+  Signup: {
+    screen: Signup,
     navigationOptions: ({navigation}) => ({
       headerStyle: {
         backgroundColor: '#ecf0f1',
@@ -125,38 +127,11 @@ const Signup_StackNavigator = createStackNavigator(
       ),
     }),
   },
-);
+});
 
-const View_User_StackNavigator = createStackNavigator(
-  {
-    View_User: {screen: View_User},
-  },
-  {
-    navigationOptions: ({navigation}) => ({
-      headerStyle: {
-        backgroundColor: '#ecf0f1',
-      },
-      headerTitleStyle: {
-        color: '#ff8918',
-      },
-      headerTintColor: '#ff8918',
-      headerLeft: (
-        <Icon
-          name="menu"
-          size={32}
-          color="#ff8913"
-          onPress={() => navigation.toggleDrawer()}
-        />
-      ),
-    }),
-  },
-);
-
-const Add_Category_StackNavigator = createStackNavigator(
-  {
-    Add_Category: {screen: Add_Category},
-  },
-  {
+const View_User_StackNavigator = createStackNavigator({
+  View_User: {
+    screen: View_User,
     navigationOptions: ({navigation}) => ({
       headerStyle: {
         backgroundColor: '#ecf0f1',
@@ -175,13 +150,11 @@ const Add_Category_StackNavigator = createStackNavigator(
       ),
     }),
   },
-);
+});
 
-const Add_Product_StackNavigator = createStackNavigator(
-  {
-    Add_Product: {screen: Add_Product},
-  },
-  {
+const Add_Category_StackNavigator = createStackNavigator({
+  Add_Category: {
+    screen: Add_Category,
     navigationOptions: ({navigation}) => ({
       headerStyle: {
         backgroundColor: '#ecf0f1',
@@ -200,7 +173,30 @@ const Add_Product_StackNavigator = createStackNavigator(
       ),
     }),
   },
-);
+});
+
+const Add_Product_StackNavigator = createStackNavigator({
+  Add_Product: {
+    screen: Add_Product,
+    navigationOptions: ({navigation}) => ({
+      headerStyle: {
+        backgroundColor: '#ecf0f1',
+      },
+      headerTitleStyle: {
+        color: '#fff',
+      },
+      headerTintColor: '#fff',
+      headerLeft: (
+        <Icon
+          name="menu"
+          size={24}
+          color="#ff8913"
+          onPress={() => navigation.toggleDrawer()}
+        />
+      ),
+    }),
+  },
+});
 
 const View_Order_main_StackNavigator = createStackNavigator(
   {
@@ -244,26 +240,105 @@ const View_Order_main_StackNavigator = createStackNavigator(
   },
 );
 
-const CustomDrawerContentComponent = (props) => (
-  <ScrollView>
-    <SafeAreaProvider>
-      <SafeAreaView
-        style={styles.container}
-        forceInset={{top: 'always', horizontal: 'never'}}>
-        <View style={styles.drawerHeader}>
-          <View style={{flex: 1}}>
-            <Image
-              resizeMode={'contain'}
-              source={require('../image/Logo1.png')}
-              style={styles.drawerImage}
+const View_Profile_StackNavigator = createStackNavigator(
+  {
+    View_Profile: {
+      screen: View_Profile,
+      navigationOptions: ({navigation}) => ({
+        headerLeft: (
+          <Icon
+            name="menu"
+            size={24}
+            color="#ff8913"
+            onPress={() => navigation.toggleDrawer()}
+          />
+        ),
+      }),
+    },
+
+    Edit_Profile: {
+      screen: Edit_Profile,
+      navigationOptions: ({navigation}) => ({
+        headerStyle: {
+          backgroundColor: '#000',
+        },
+        headerTitleStyle: {
+          color: '#ff8913',
+          fontWeight: 'bold',
+        },
+        headerTintColor: '#ff8918',
+      }),
+    },
+  },
+  {
+    initialRouteName: 'View_Profile',
+    navigationOptions: ({navigation}) => ({
+      headerStyle: {
+        backgroundColor: '#ecf0f1',
+      },
+      headerTitleStyle: {
+        color: '#fff',
+      },
+      headerTintColor: '#fff',
+    }),
+  },
+);
+
+function CustomDrawerContentComponent(props) {
+  const {navigation} = props;
+  const user = navigation.getParam('item', 'NO-ID');
+
+  return (
+    <ScrollView>
+      <SafeAreaProvider>
+        <SafeAreaView forceInset={{top: 'always', horizontal: 'never'}}>
+          <View style={styles.header}>
+            <View
+              style={{
+                height: 5,
+                // marginTop:10,
+                width: '100%',
+                backgroundColor: '#ff8913',
+              }}
+            />
+            <ListItem
+              title={
+                <Text>
+                  {user.first_name} {user.last_name}{' '}
+                </Text>
+              }
+              subtitle={user.email_id}
+              leftAvatar={
+                <Avatar
+                  rounded
+                  showEditButton
+                  overlayContainerStyle={{backgroundColor: '#ecf0f1'}}
+                  icon={{
+                    name: 'user',
+                    type: 'font-awesome',
+                    color: '#ff8918',
+                  }}
+                  size="large"
+                />
+              }
+              bottomDivider
+              chevron
+            />
+            <View
+              style={{
+                height: 5,
+                // marginTop:10,
+                width: '100%',
+                backgroundColor: '#ff8913',
+              }}
             />
           </View>
-        </View>
-        <DrawerItems {...props} />
-      </SafeAreaView>
-    </SafeAreaProvider>
-  </ScrollView>
-);
+          <DrawerItems {...props} />
+        </SafeAreaView>
+      </SafeAreaProvider>
+    </ScrollView>
+  );
+}
 
 const DrawerNavigatorExample = createDrawerNavigator(
   {
@@ -282,7 +357,28 @@ const DrawerNavigatorExample = createDrawerNavigator(
       navigationOptions: {
         drawerLabel: 'View Product',
         drawerIcon: ({tintColor, focused}) => (
-          <Icon name="product-hunt" type="font-awesome" size={24} color={tintColor} />
+          <Icon
+            name="product-hunt"
+            type="font-awesome"
+            size={24}
+            color={tintColor}
+          />
+        ),
+      },
+    },
+
+    View_Profile: {
+      //Title
+      screen: View_Profile_StackNavigator,
+      navigationOptions: {
+        drawerLabel: 'View Profile',
+        drawerIcon: ({tintColor, focused}) => (
+          <Icon
+            name="id-badge"
+            type="font-awesome-5"
+            size={24}
+            color={tintColor}
+          />
         ),
       },
     },
@@ -293,7 +389,12 @@ const DrawerNavigatorExample = createDrawerNavigator(
       navigationOptions: {
         drawerLabel: 'Add Distributor',
         drawerIcon: ({tintColor, focused}) => (
-          <Icon name="user-plus" type="font-awesome" size={24} color={tintColor} />
+          <Icon
+            name="user-plus"
+            type="font-awesome"
+            size={24}
+            color={tintColor}
+          />
         ),
       },
     },
@@ -337,39 +438,37 @@ const DrawerNavigatorExample = createDrawerNavigator(
       navigationOptions: {
         drawerLabel: 'View Order',
         drawerIcon: ({tintColor, focused}) => (
-          <Icon name="product-hunt" type="font-awesome" size={24} color={tintColor} />
+          <Icon
+            name="product-hunt"
+            type="font-awesome"
+            size={24}
+            color={tintColor}
+          />
         ),
       },
     },
   },
   {
     // initialRouteName: 'Home',
-    drawerBackgroundColor: '#ecf0f1',
+    drawerBackgroundColor: '#d0d3d4',
     contentComponent: CustomDrawerContentComponent,
+    contentOptions: {
+      activeTintColor: '#ff8918',
+      inactiveTintColor: '#000000',
+
+      activeBackgroundColor: '#85c1e9',
+      labelStyle: {
+        fontSize: 15,
+        marginLeft: 10,
+      },
+    },
   },
 );
 
 const styles = StyleSheet.create({
-  container: {
+  header: {
     flex: 1,
-  },
-  drawerHeader: {
-    // backgroundColor: '#512DA8',
-    height: 140,
-    alignItems: 'center',
-    justifyContent: 'center',
-    flex: 1,
-    flexDirection: 'row',
-  },
-  drawerHeaderText: {
-    color: 'white',
-    fontSize: 24,
-    fontWeight: 'bold',
-  },
-  drawerImage: {
-    margin: 10,
-    width: '100%',
-    height: '100%',
+    backgroundColor: '#fff',
   },
 });
 
