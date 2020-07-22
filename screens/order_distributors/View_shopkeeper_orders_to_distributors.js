@@ -35,36 +35,36 @@ export default class Project extends Component {
       chevron
     />
   );
- 
+
   render() {
     const list = [
       {
         no_id: 1,
-        name:'New Orders',
+        name: 'New Orders',
       },
       {
         no_id: 2,
-        name:'Confirmed Orders',
+        name: 'Confirmed Orders',
       },
       {
         no_id: 3,
-        name:'Accepted Orders',
+        name: 'Accepted Orders',
       },
       {
         no_id: 4,
-        name:'Delivered Orders',
+        name: 'Delivered Orders',
       },
-    ]
+    ];
     return (
       <View style={styles.MainContainer}>
-          <Card containerStyle={{padding: 0}}>
-            <FlatList
-              // keyExtractor={this.keyExtractor}
-              data={list}
-              ItemSeparatorComponent={this.FlatListItemSeparator}
-              renderItem={this.renderItem}
-            />
-          </Card>
+        <Card containerStyle={{padding: 0}}>
+          <FlatList
+            // keyExtractor={this.keyExtractor}
+            data={list}
+            ItemSeparatorComponent={this.FlatListItemSeparator}
+            renderItem={this.renderItem}
+          />
+        </Card>
       </View>
     );
   }

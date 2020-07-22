@@ -12,8 +12,7 @@ import {
   TouchableHighlight,
 } from 'react-native';
 import {Button} from 'native-base';
-import {Card, ListItem,} from 'react-native-elements';
-
+import {Card, ListItem} from 'react-native-elements';
 
 export default class Project extends Component {
   constructor(props) {
@@ -26,7 +25,7 @@ export default class Project extends Component {
   }
 
   order = () => {
-    return fetch('http://192.168.43.161/Ninelight/Order_List.php')
+    return fetch('http://192.168.43.106/Ninelight/Order_List.php')
       .then((response) => response.json())
       .then((responseJson) => {
         Alert.alert(responseJson);
@@ -81,8 +80,8 @@ export default class Project extends Component {
       subtitle={
         <View style={styles.subtitleView}>
           <Text style={styles.ratingText}>
-          quantity: {item.quantity} 
-          Total Price: {item.total_price}
+            quantity: {item.quantity}
+            Total Price: {item.total_price}
           </Text>
         </View>
       }
@@ -108,22 +107,24 @@ export default class Project extends Component {
     const c_id = navigation.getParam('id', 'NO-User');
 
     return (
-      <View style={styles.MainContainer}>
-        <Card containerStyle={{padding: 0}}>
-          <FlatList
-            // keyExtractor={this.keyExtractor}
-            Vertical={true}
-            data={this.state.dataSource}
-            ItemSeparatorComponent={this.FlatListItemSeparator}
-            renderItem={this.renderItem}
-          />
-          <TouchableHighlight
-            style={[styles.buttonContainer, styles.signupButton]}
-            onPress={this.order}>
-            <Text style={styles.signUpText}>Confirm Order</Text>
-          </TouchableHighlight>
-        </Card> 
-      </View>
+      <ScrollView>
+        <View style={styles.MainContainer}>
+          <Card containerStyle={{padding: 0}}>
+            <FlatList
+              // keyExtractor={this.keyExtractor}
+              Vertical={true}
+              data={this.state.dataSource}
+              ItemSeparatorComponent={this.FlatListItemSeparator}
+              renderItem={this.renderItem}
+            />
+            <TouchableHighlight
+              style={[styles.buttonContainer, styles.signupButton]}
+              onPress={this.order}>
+              <Text style={styles.signUpText}>Confirm Order</Text>
+            </TouchableHighlight>
+          </Card>
+        </View>
+      </ScrollView>
     );
   }
 }
@@ -174,12 +175,12 @@ const styles = StyleSheet.create({
   subtitleView: {
     flexDirection: 'row',
     paddingLeft: 10,
-    paddingTop: 5
+    paddingTop: 5,
   },
 
   ratingText: {
     paddingLeft: 10,
-    color: 'grey'
+    color: 'grey',
   },
 
   FlatListItemStyle: {

@@ -125,32 +125,20 @@ const styles = StyleSheet.create({
   MainContainer: {
     justifyContent: 'center',
     flex: 1,
-    // margin: 10,
     backgroundColor: '#ff8918',
+  },
+  Container: {
+    justifyContent: 'center',
+    flex: 1,
+    margin: 10,
+    // backgroundColor:'#696969',
+    color: '#008080',
     paddingTop: Platform.OS === 'ios' ? 20 : 0,
-  },
-
-  subtitleView: {
-    flexDirection: 'row',
-    paddingLeft: 10,
-    paddingTop: 5,
-  },
-
-  ratingText: {
-    paddingLeft: 10,
-    color: 'grey',
   },
 
   FlatListItemStyle: {
     padding: 10,
-    fontSize: 25,
-  },
-
-  Flat: {
-    flex: 1,
-  },
-
-  fonts: {
-    fontSize: 12,
+    fontSize: 20,
+    height: 50,
   },
 });

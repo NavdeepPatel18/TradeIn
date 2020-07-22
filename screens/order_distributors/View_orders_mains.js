@@ -51,9 +51,16 @@ export default class Project extends Component {
 
 const styles = StyleSheet.create({
   MainContainer: {
-    backgroundColor: '#ecf0f1',
     justifyContent: 'center',
     flex: 1,
+    backgroundColor: '#ff8918',
+  },
+  Container: {
+    justifyContent: 'center',
+    flex: 1,
+    margin: 10,
+    // backgroundColor:'#696969',
+    color: '#008080',
     paddingTop: Platform.OS === 'ios' ? 20 : 0,
   },
 

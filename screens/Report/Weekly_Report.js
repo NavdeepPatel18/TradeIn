@@ -88,14 +88,21 @@ const styles = StyleSheet.create({
   MainContainer: {
     justifyContent: 'center',
     flex: 1,
+    backgroundColor: '#ff8918',
+  },
+  Container: {
+    justifyContent: 'center',
+    flex: 1,
     margin: 10,
+    // backgroundColor:'#696969',
+    color: '#008080',
     paddingTop: Platform.OS === 'ios' ? 20 : 0,
   },
 
   FlatListItemStyle: {
     padding: 10,
     fontSize: 20,
-    height: 120,
+    height: 50,
   },
   total: {
     color: 'orange',
