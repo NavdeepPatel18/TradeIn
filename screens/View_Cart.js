@@ -76,7 +76,7 @@ export default class Project extends Component {
 
   renderItem = ({item}) => (
     <ListItem
-      title={item.product_name}
+      title={item.product_id}
       subtitle={
         <View style={styles.subtitleView}>
           <Text style={styles.ratingText}>
@@ -85,11 +85,6 @@ export default class Project extends Component {
           </Text>
         </View>
       }
-      leftAvatar={{
-        size: 100,
-        source: item.image && {uri: item.image},
-        title: item.product_name,
-      }}
       bottomDivider
     />
   );

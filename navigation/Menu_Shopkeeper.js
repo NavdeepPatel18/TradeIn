@@ -314,8 +314,6 @@ function CustomDrawerContentComponent(props) {
 
   return (
     <ScrollView>
-      <SafeAreaProvider>
-        <SafeAreaView forceInset={{top: 'always', horizontal: 'never'}}>
           <View style={styles.header}>
             <View
               style={{
@@ -358,8 +356,6 @@ function CustomDrawerContentComponent(props) {
             />
           </View>
           <DrawerItems {...props} />
-        </SafeAreaView>
-      </SafeAreaProvider>
     </ScrollView>
   );
 }
